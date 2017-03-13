@@ -13,7 +13,7 @@
         initExperimenter();
     </script>
 
-    <script src="vendor/angular.min.js"></script>
+    <script src="angular.min.js"></script>
 
     <script>
         var app = angular.module('app', []);
