@@ -78,6 +78,8 @@ body {
 	font: 11pt Verdana;
 }
 
+
+
 .template-item:not(.template-selected):hover {
 	color: #599FCF;
 }
@@ -159,3 +161,5 @@ body {
 
 .ui-state-hover .cat-12 { color: #ddd !important; }
 .ui-state-active .cat-12 {	color: #fff !important; }
+
+
