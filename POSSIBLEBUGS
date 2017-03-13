@@ -1,0 +1,12 @@
+experimenter (survey)
+	
+	Loading and unloading the survey from the back 
+		solution: only load the survey from the back once, then push all changes back on save
+	
+	Creating new survey: 
+		matching names?
+		spaces bars?
+		input for keywords?
+		have to implement how many key words are expected
+
+

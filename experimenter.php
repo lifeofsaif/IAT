@@ -17,33 +17,56 @@
 
     <script>
         var app = angular.module('app', []);
-        app.controller('MainController', function($scope){
-
-
-            $scope.selectedTab="IAT"
+        app.controller('MainController', function($scope, $http){
+            initializeSurveys();
+            function initializeSurveys() {
+                $scope.selectedTab = "IAT"
+                $scope.surveyTemplate = {
+                    title: "",
+                    instructions: "",
+                    keywords: "",
+                    paragraph: "",
+                    time: {
+                        minutes: 0,
+                        seconds: 0
+                    }
+                };
+                $scope.sixty = [];
+                for (var i = 0; i < 61; i++)
+                    $scope.sixty.push(i)
+                $scope.surveyStatus = "new";
+                $http.get("exampleToDelete.json")
+                    .then(function (response) {
+                        $scope.surveys = (response.data);
+                    });
+            }
             $scope.setTab = function(selection){
                 $scope.selectedTab = selection
             }
-
-            $scope.surveyTemplate = {
-                title: "",
-                instructions: "",
-                keywords: "",
-                paragraph: "",
-                time: {
-                    minutes: 0,
-                    seconds: 0
-                }
-            };
-
-
-
-            $scope.sixty = [];
-            for(var i = 0; i<61; i++)
-                $scope.sixty.push(i)
-
-
-
+            $scope.saveNewSurvey = function(){
+                $.getJSON('exampleToDelete.json', function (data) {
+                    data[$scope.surveyTemplate.title] = $scope.surveyTemplate;
+                    $scope.surveys = data;
+                    $.ajax({
+                        url: 'savejson.php',
+                        type: 'POST',
+                        data: data
+                    });
+                })
+            }
+            $scope.saveAllEditedSurveys = function () {
+                $.ajax({
+                    url: 'savejson.php',
+                    type: 'POST',
+                    data: $scope.surveys
+                });
+            }
+            $scope.newOrEditSurvey = function(selection){
+                $scope.surveyStatus = selection;
+            }
+            $scope.selectToEditSurvey = function (survey) {
+                $scope.surveyToEdit = $scope.surveys[survey.title];
+            }
 
         });
     </script>
@@ -64,8 +87,10 @@
     </div>
 
     <div >
+        Choose One:
         <button  ng-click="setTab('IAT')">IAT</button>
         <button ng-click="setTab('Survey')">Survey</button>
+        <button ng-click="setTab('neither')">Neither</button>
     </div>
 
 
@@ -103,31 +128,80 @@
     <div ng-hide="selectedTab!='Survey'" class="SurveyNotIAT">
 
 
+        <div >
+            Choose One:
+            <button  ng-click="newOrEditSurvey('new')">Create New Survey</button>
+            <button ng-click="newOrEditSurvey('edit')">Edit/View Existing Surveys</button>
+        </div>
 
-        <p>Enter Title:</p>
-        <textarea ng-model="surveyTemplate.title" cols="50" rows="1"></textarea>
+        <div ng-hide="surveyStatus!='new'">
+            <h2>Create a New Survey</h2>
 
-        <p>Enter Instructions:</p>
-        <textarea ng-model="surveyTemplate.instructions" cols="50" rows="10"></textarea>
+            <p>Enter Title (no spaces):</p>
+            <textarea ng-model="surveyTemplate.title" cols="50" rows="1"></textarea>
 
-        <p>Enter Keywords:</p>
-        <textarea ng-model="surveyTemplate.keywords" cols="50" rows="10"></textarea>
+            <p>Enter Instructions:</p>
+            <textarea ng-model="surveyTemplate.instructions" cols="50" rows="10"></textarea>
 
-        <p>Enter Paragraph:</p>
-        <textarea  ng-model="surveyTemplate.paragraph" cols="50" rows="10"></textarea>
+            <p>Enter Keywords:</p>
+            <textarea ng-model="surveyTemplate.keywords" cols="50" rows="10"></textarea>
 
-        <p>Select Time</p>
-        Minutes
-        <select ng-model="surveyTemplate.time.minutes">
-            <option ng-repeat="minute in sixty" >{{minute}}</option>
-        </select>
-        Seconds
-        <select ng-model="surveyTemplate.time.seconds">
-            <option ng-repeat="second in sixty" >{{second}}</option>
-        </select>
+            <p>Enter Paragraph:</p>
+            <textarea  ng-model="surveyTemplate.paragraph" cols="50" rows="10"></textarea>
 
-        <button >Save</button>
+            <p>Select Time</p>
+            Minutes
+            <select ng-model="surveyTemplate.time.minutes">
+                <option ng-repeat="minute in sixty" >{{minute}}</option>
+            </select>
+            Seconds
+            <select ng-model="surveyTemplate.time.seconds">
+                <option ng-repeat="second in sixty" >{{second}}</option>
+            </select>
 
+            <button ng-click="saveNewSurvey()">Save</button>
+        </div>
+        <div ng-hide="surveyStatus!='edit'">
+
+
+            <h2>Choose a Survey to Edit</h2>
+            <ul>
+                <li ng-repeat="survey in surveys" ng-click="selectToEditSurvey(survey)">{{survey.title}}</li>
+            </ul>
+
+
+
+            <p>Enter Title (no spaces):</p>
+            <textarea ng-model="surveyToEdit.title" cols="50" rows="1"></textarea>
+
+            <p>Enter Instructions:</p>
+            <textarea ng-model="surveyToEdit.instructions" cols="50" rows="10"></textarea>
+
+            <p>Enter Keywords:</p>
+            <textarea ng-model="surveyToEdit.keywords" cols="50" rows="10"></textarea>
+
+            <p>Enter Paragraph:</p>
+            <textarea  ng-model="surveyToEdit.paragraph" cols="50" rows="10"></textarea>
+
+            <p>Select Time</p>
+            Minutes
+            <select ng-model="surveyToEdit.time.minutes">
+                <option ng-repeat="minute in sixty" >{{minute}}</option>
+            </select>
+            Seconds
+            <select ng-model="surveyToEdit.time.seconds">
+                <option ng-repeat="second in sixty" >{{second}}</option>
+            </select>
+
+            <button ng-click="saveAllEditedSurveys()">Save All Surveys</button>
+
+
+
+        </div>
+
+
+    </div>
+    <div ng-hide="selectedTab!='neither'">
 
     </div>
 </body>
