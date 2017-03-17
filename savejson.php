@@ -1,5 +1,5 @@
 <?php
-$fp = fopen('exampleToDelete.json', 'w');
+$fp = fopen('savedSurveys.json', 'w');
 
 
 fwrite($fp, json_encode($_POST));

@@ -16,8 +16,9 @@ function initialize()
 		document.title = input.active + " IAT";
 		$.getJSON("templates/"+input.active+"/input.txt", function(data) { 
 			template = data;
+
 			$.get("core/instruct0.html", function(data) {
-				$("#instructions").html(data);
+				//$("#instructions").html(data);
 				$("#subID").val(randomString(10));
 			});
 		});
