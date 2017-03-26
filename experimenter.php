@@ -9,97 +9,18 @@
     <script type="text/javascript" src="core/js/jquery-ui-1.8.18.custom.min.js"></script>
     <script type="text/javascript" src="core/js/jquery-cookie.js"></script>
     <script type="text/javascript" src="core/js/experimenter.js"></script>
-    <script type="text/javascript">
-        initExperimenter();
-    </script>
 
     <script src="angular.min.js"></script>
+    <script src="core/js/experimenterNG.js?"></script>
 
-    <script>
-        var app = angular.module('app', []);
-        app.controller('MainController', function($scope, $http){
-            $scope.initializeSurveys = function(){
-                $scope.surveyOrIat = "Survey"
-                $scope.newOrEdit = "new";
-                $scope.surveyTemplate = $scope.getNewSurveyTemplate();
-                $http.get("savedSurveys.json")
-                    .then(function (response) {
-
-                        $scope.surveys = (response.data);
-                        if (!("surveys" in $scope.surveys))
-                            $scope.surveys.surveys = {};
-
-                    });
-                $scope.sixty = [];
-                for (var i = 0; i < 61; i++)
-                    $scope.sixty.push(i)
-                $scope.surveyStatus = "new";
-
-            }
-
-
-
-            $scope.addNewSurvey = function () {
-               $scope.surveyTemplate.id = $scope.surveys["count"] = parseInt($scope.surveys["count"]) + 1;
-                $scope.surveys.surveys[$scope.surveys["count"]] = $scope.surveyTemplate;
-                $scope.surveyTemplate = $scope.getNewSurveyTemplate();
-            }
-
-            $scope.getNewSurveyTemplate = function() {
-               return  {
-                    title: "",
-                    instructions: "",
-                    keywords: "",
-                    numberOfKeywordsInParagraph: "",
-                    paragraph: "",
-                    time: {
-                        minutes: 0,
-                        seconds: 0
-                    },
-                    id: ""
-                }
-            }
-
-            $scope.editSurvey = function (survey) {
-                $scope.surveyToEdit = survey
-            }
-
-            $scope.removeSurvey = function(survey){
-                if(survey.id == $scope.surveys.active) {
-
-                    $scope.surveys.active = 0;
-                }
-                $scope.surveyToEdit = null;
-                delete $scope.surveys.surveys[survey.id];
-
-
-            }
-
-            $scope.disableSurveys = function(){
-                $scope.surveys.active = 0;
-            }
-
-            $scope.setActive = function(survey) {
-                $scope.surveys["active"] = survey.id;
-            }
-
-            $scope.saveChangesToSurveys = function(){
-                if(confirm('Save all changes to survey?')) {
-
-                    $.ajax({
-                        url: 'savejson.php',
-                        type: 'POST',
-                        data: $scope.surveys
-                    });
-
-                }else alert('A wise decision!')
-
-            }
-
-            $scope.initializeSurveys();
-
-        });
+    <script type="text/javascript">
+        initExperimenter();
+        //QWBGP7gaagr&
     </script>
+
+
+
+
 
 
 
@@ -111,10 +32,15 @@
 
 
     <div id="alert-window"></div>
+
     <div class="exp-header ui-widget-header">
-        <div class="exp-header-active-label">Active:</div>
+
+        <div class="exp-header-active-label">Active IAT:&nbsp;</div>
         <div class="exp-header-active">None</div>
+        <div>Active Survey: {{activeSurvey}}</div>
+
     </div>
+
     <div >
         Choose One:
         <button  ng-click="surveyOrIat='IAT'">IAT</button>
@@ -157,14 +83,30 @@
             <textarea ng-model="surveyTemplate.title" cols="50" rows="1"></textarea>
             <p>Enter Instructions:</p>
             <textarea ng-model="surveyTemplate.instructions" cols="50" rows="10"></textarea>
-            <p>Enter Keywords:</p>
-            <textarea ng-model="surveyTemplate.keywords" cols="50" rows="10"></textarea>
-            <p>Enter Paragraph:</p>
-            <textarea  ng-model="surveyTemplate.paragraph" cols="50" rows="10"></textarea>
-            <br><br>How many keywords are in the paragraph?
-            <select ng-model="surveyTemplate.numberOfKeyWordsInParagraph">
-                <option ng-repeat="number in sixty" >{{number}}</option>
-            </select>
+
+            <!-- -->
+
+            <p>Enter Paragraph</p>
+            <textarea  ng-model='surveyTemplate.paragraph' ng-change="splitPeas(surveyTemplate)" cols="50" rows="10"></textarea>
+
+            <p>Enter Keywords</p>
+            <textarea  ng-model='surveyTemplate.keywords' ng-change="splitPeas(surveyTemplate)" cols="50" rows="10"></textarea>
+
+            <p>This is what your paragraph will look like</p>
+            <p style="font-size: small; width: 50%">
+                &nbsp;
+                <span ng-repeat="word in surveyTemplate.wordArray track by $index" ng-style="word.style">
+                    {{word.word}}
+                </span>
+                &nbsp;
+            </p>
+            <!-- -->
+
+            <p>How many keywords are in the paragraph?
+                <select ng-model="surveyTemplate.numberOfKeyWordsInParagraph">
+                    <option ng-repeat="number in sixty" >{{number}}</option>
+                </select>
+            </p>
             <p>Select Time:</p>
             Minutes
             <select ng-model="surveyTemplate.time.minutes">
@@ -190,22 +132,33 @@
                 </li>
             </ul>
 
-                <p>Enter Title (no spaces):</p>
+                <p>Enter Title:</p>
                 <textarea ng-model="surveyToEdit.title" cols="50" rows="1"></textarea>
 
                 <p>Enter Instructions:</p>
                 <textarea ng-model="surveyToEdit.instructions" cols="50" rows="10"></textarea>
 
-                <p>Enter Keywords:</p>
-                <textarea ng-model="surveyToEdit.keywords" cols="50" rows="10"></textarea>
+                <p>Enter Paragraph</p>
+                <textarea  ng-model='surveyToEdit.paragraph' ng-change="splitPeas(surveyToEdit)" cols="50" rows="10"></textarea>
 
-                <p>Enter Paragraph:</p>
-                <textarea  ng-model="surveyToEdit.paragraph" cols="50" rows="10"></textarea>
+                <p>Enter Keywords</p>
+                <textarea  ng-model='surveyToEdit.keywords' ng-change="splitPeas(surveyToEdit)" cols="50" rows="10"></textarea>
 
-                <br><br>How many keywords are in the paragraph?
+                <p>This is what your paragraph will look like</p>
+                <p style="font-size: small; width: 400px">
+                    &nbsp;
+                    <span ng-repeat="word in surveyToEdit.wordArray track by $index" ng-style="word.style">
+                        {{word.word}}
+                    </span>
+                    &nbsp;
+                </p>
+
+                <p>How many keywords are in the paragraph?
                 <select ng-model="surveyToEdit.numberOfKeyWordsInParagraph">
                     <option ng-repeat="number in sixty" >{{number}}</option>
-                </select>
+                </select></p>
+
+
 
                 <p>Select Time:</p>
                 Minutes

@@ -567,11 +567,12 @@ function WriteFile()
 			
 		}
 	}
+	str = str + surveyData;
 	
-	
-    $.post("core/fileManager.php", { 'op':'writeoutput', 'template':template.name, 
- 			'subject': subject, 'data': str });	
- 	
+    $.post("core/fileManager.php", { 'op':'writeoutput', 'template':template.name,
+ 			'subject': subject, 'data': str });
+
+
 	// notify user of success?
 }
 function WriteDatabase()
