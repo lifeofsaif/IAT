@@ -81,7 +81,7 @@ app.controller('MainController', function ($scope, $compile, $http, $interval) {
         $("#instructions").html(
             $compile(
                 "<div> " +
-                "<h2 >instructions</h2>" +
+                "<h2 >Instructions</h2>" +
                 "<p>{{activeSurvey.instructions}}</p>" +
                 "<button ng-hide='startSurvey' ng-click='loadSurvey()'>start the survey</button>" +
                 "<div ng-show='startSurvey'>" +
