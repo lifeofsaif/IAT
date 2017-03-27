@@ -1,49 +1,61 @@
 var app = angular.module('app', []);
-app.controller('MainController', function($scope, $http){
-    $scope.fuck = function(index){
+app.controller('MainController', function ($scope, $http) {
+    $scope.fuck = function (index) {
         console.log("fuck" + index)
     }
 
 
-    $scope.splitPeas = function(obj){
-        var wordArray = obj.paragraph.split(/  */);
-        obj.wordArray = []
-        for(var i = 0; i < wordArray.length; i++){
-            obj.wordArray.push(
-                {
-                    "word": wordArray[i],
-                    "style":{
-                        "background-color": "white"
-                    },
-                    "highlighted": "false"
-                })
-        }
-        var highlighters;
-        if(obj.keywords){
-            highlighters = obj.keywords.split(" ");
-            for(var i = 0; i < highlighters.length; i++){
-                for(var j = 0; j < obj.wordArray.length; j++){
-                    if(  simplify(highlighters[i]) == simplify(obj.wordArray[j].word)  ) {
-                        obj.wordArray[j].style = {
-                            "background-color": "yellow"
-                        }
-                        obj.wordArray[j].highlighted = true;
+    $scope.splitPeas = function (obj) {
+
+        //var wordArray = obj.paragraph.split(/\s*\b\s*/);
+        if (obj.paragraph) {
+            var wordArray = obj.paragraph.split(/  */);
+            for (var i = 0; i < wordArray.length; i++) {
+                wordArray[i] = wordArray[i].match(/[\w-']+|[^\w\s]+/g);
+                for (j = 0; j < wordArray[i].length; j++) {
+                    wordArray[i][j] = {
+                        "word": wordArray[i][j]
                     }
                 }
             }
-        }
 
+
+
+
+
+            if (obj.keywords) {
+                var keywords = obj.keywords.split(" ");
+                for(var z = 0; z < keywords.length; z++) {
+                    for (var i = 0; i < wordArray.length; i++) {
+                        for (var j = 0; j < wordArray[i].length; j++) {
+                            if( simplify(keywords[z]) == simplify(wordArray[i][j].word) ){
+                                wordArray[i][j].style = {
+                                    "background-color": "yellow"
+                                }
+                                wordArray[i][j].highlighted = "false";
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            obj.wordArray = wordArray;
+
+        } else {
+            obj.wordArray = null;
+        }
     };
 
     $scope.keywords = "";
 
 
-    function simplify(word){
-        return word.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ")
+    function simplify(word) {
+        return word.toLowerCase();
     }
 
 
-    $scope.initializeSurveys = function(){
+    $scope.initializeSurveys = function () {
         $scope.surveyOrIat = "IAT"
         $scope.newOrEdit = "new";
         $scope.surveyTemplate = $scope.getNewSurveyTemplate();
@@ -61,15 +73,14 @@ app.controller('MainController', function($scope, $http){
         $scope.surveyStatus = "new";
     }
 
-    function setActiveSurvey(){
-        if(parseInt($scope.surveys.active) == 0){
+    function setActiveSurvey() {
+        if (parseInt($scope.surveys.active) == 0) {
             $scope.activeSurvey = "NONE"
 
-        } else{
+        } else {
             $scope.activeSurvey = $scope.surveys.surveys[$scope.surveys.active].title;
         }
     }
-
 
 
     $scope.addNewSurvey = function () {
@@ -78,8 +89,8 @@ app.controller('MainController', function($scope, $http){
         $scope.surveyTemplate = $scope.getNewSurveyTemplate();
     }
 
-    $scope.getNewSurveyTemplate = function() {
-        return  {
+    $scope.getNewSurveyTemplate = function () {
+        return {
             title: "",
             instructions: "",
             numberOfKeywordsInParagraph: "",
@@ -96,8 +107,8 @@ app.controller('MainController', function($scope, $http){
         $scope.surveyToEdit = survey
     }
 
-    $scope.removeSurvey = function(survey){
-        if(survey.id == $scope.surveys.active) {
+    $scope.removeSurvey = function (survey) {
+        if (survey.id == $scope.surveys.active) {
 
             $scope.surveys.active = 0;
         }
@@ -108,18 +119,18 @@ app.controller('MainController', function($scope, $http){
 
     }
 
-    $scope.disableSurveys = function(){
+    $scope.disableSurveys = function () {
         $scope.surveys.active = 0;
         setActiveSurvey();
     }
 
-    $scope.setActive = function(survey) {
+    $scope.setActive = function (survey) {
         $scope.surveys["active"] = survey.id;
         setActiveSurvey();
     }
 
-    $scope.saveChangesToSurveys = function(){
-        if(confirm('Save all changes to survey?')) {
+    $scope.saveChangesToSurveys = function () {
+        if (confirm('Save all changes to survey?')) {
 
             $.ajax({
                 url: 'savejson.php',
@@ -127,12 +138,11 @@ app.controller('MainController', function($scope, $http){
                 data: $scope.surveys
             });
 
-        }else alert('A wise decision!')
+        } else alert('A wise decision!')
 
     }
 
     $scope.initializeSurveys();
-
 
 
 });
