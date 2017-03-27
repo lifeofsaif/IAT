@@ -30,14 +30,14 @@
 
     <div class="exp-header-active-label">Active IAT:&nbsp;</div>
     <div class="exp-header-active">None</div>
-    <div>Active Survey: {{activeSurvey}}</div>
+    <div>Active SAP: {{activeSurvey}}</div>
 
 </div>
 
 <div>
     Choose One:
     <button ng-click="surveyOrIat='IAT'">IAT</button>
-    <button ng-click="surveyOrIat='Survey'">Survey</button>
+    <button ng-click="surveyOrIat='Survey'">Self Activation Prime</button>
 
 
 </div>
@@ -60,17 +60,17 @@
     </div>
 </div>
 <div ng-show="surveyOrIat=='Survey'">
-    <button ng-click="newOrEdit='new'">New Survey</button>
-    <button ng-click="newOrEdit='edit'">Edit Surveys</button>
-    <button ng-click="disableSurveys()">Disable Survey Functionality</button>
+    <button ng-click="newOrEdit='new'">New</button>
+    <button ng-click="newOrEdit='edit'">Edit</button>
+    <button ng-click="disableSurveys()">Disable SAP Functionality</button>
     <button ng-click="saveChangesToSurveys()">Save Changes</button>
     <p style="font-size: x-small">
-        to enable survey functionality, navigate to edit surveys, and select a survey to set as active
+        to enable SAP functionality, navigate to edit, and select a SAP to set as active
     </p>
 
     <div ng-show="newOrEdit=='new'">
 
-        <h2>Create a New Survey</h2>
+        <h2>Create a New SAP</h2>
         <p>Enter Title:</p>
         <textarea ng-model="surveyTemplate.title" cols="50" rows="1"></textarea>
         <p>Enter Instructions:</p>
@@ -115,7 +115,7 @@
 
     </div>
     <div ng-show="newOrEdit=='edit'">
-        <h2>Choose a Survey to Edit</h2>
+        <h2>Choose a SAP to Edit</h2>
         <ul>
             <li ng-repeat="survey in surveys.surveys">
                 {{survey.title}}
