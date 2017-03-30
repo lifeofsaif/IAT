@@ -24,8 +24,6 @@ app.controller('MainController', function ($scope, $compile, $http, $interval) {
     function cancelTimer(count){
         $interval.cancel(timer);
         $scope.timerStarted = false;
-        $scope.seconds = "00"
-        $scope.minutes = 0;
         $scope.time = $scope.time - count;
     }
 

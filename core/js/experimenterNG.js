@@ -4,7 +4,8 @@ app.controller('MainController', function ($scope, $http) {
         console.log("fuck" + index)
     }
 
-
+    // function for transforming survey paragraph into
+    // individual highlightable words
     $scope.splitPeas = function (obj) {
 
         //var wordArray = obj.paragraph.split(/\s*\b\s*/);
@@ -18,10 +19,6 @@ app.controller('MainController', function ($scope, $http) {
                     }
                 }
             }
-
-
-
-
 
             if (obj.keywords) {
                 var keywords = obj.keywords.split(" ");
@@ -81,7 +78,6 @@ app.controller('MainController', function ($scope, $http) {
             $scope.activeSurvey = $scope.surveys.surveys[$scope.surveys.active].title;
         }
     }
-
 
     $scope.addNewSurvey = function () {
         $scope.surveyTemplate.id = $scope.surveys["count"] = parseInt($scope.surveys["count"]) + 1;
