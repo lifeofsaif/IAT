@@ -76,11 +76,11 @@
 
 
         <p>instruction header</p>
-        <textarea ng-model="surveyTemplate.paragraph"> </textarea>
+        <textarea ng-model="surveyTemplate.instructionHeader"> </textarea>
 
 
         <p>Enter Instructions:</p>
-        <textarea ng-model="surveyTemplate.paragraph" cols="50" rows="10"></textarea>
+        <textarea ng-model="surveyTemplate.instructions" cols="50" rows="10"></textarea>
 
         <!-- -->
 
