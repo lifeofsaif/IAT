@@ -73,8 +73,14 @@
         <h2>Create a New SAP</h2>
         <p>Enter Title:</p>
         <textarea ng-model="surveyTemplate.title" cols="50" rows="1"></textarea>
+
+
+        <p>instruction header</p>
+        <textarea ng-model="surveyTemplate.paragraph"> </textarea>
+
+
         <p>Enter Instructions:</p>
-        <textarea ng-model="surveyTemplate.instructions" cols="50" rows="10"></textarea>
+        <textarea ng-model="surveyTemplate.paragraph" cols="50" rows="10"></textarea>
 
         <!-- -->
 
@@ -128,7 +134,15 @@
         <p>Enter Title:</p>
         <textarea ng-model="surveyToEdit.title" cols="50" rows="1"></textarea>
 
-        <p>Enter Instructions:</p>
+
+
+
+
+        <p>instruction header</p>
+        <textarea ng-model="surveyToEdit.instructionHeader"> </textarea>
+
+
+        <p>Instructions</p>
         <textarea ng-model="surveyToEdit.instructions" cols="50" rows="10"></textarea>
 
         <p>Enter Paragraph</p>
