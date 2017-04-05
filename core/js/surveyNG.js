@@ -72,31 +72,45 @@ app.controller('MainController', function ($scope, $compile, $http, $interval) {
         }
     }
 
+    function checkForValidID(){
+
+        sub = $("#subID").val();
+
+        if(sub == "") {
+            alert("Please enter a valid subject ID");
+            return false;
+        }
+        return true;
+
+    }
+
 
     $scope.loadSurveyInstructions = function () {
-        $scope.movingOnwards = true;
-        $scope.wordsHighlighted = 0;
-        $("#instructions").html(
-            $compile(
-                "<div> " +
-                "<h2 >{{activeSurvey.instructionHeader}}</h2>" +
-                "<p>{{activeSurvey.instructions}}</p>" +
-                "<button ng-hide='startSurvey' ng-click='loadSurvey()'>start</button>" +
-                "<div ng-show='startSurvey'>" +
-                "<h2 >{{activeSurvey.title}}</h2>" +
-                "<p style='cursor:default;'>" +
-                "<span ng-repeat='key in activeSurvey.wordArray track by $index' >" +
-                    "<span ng-repeat='word in key track by $index' ng-style='myStyle{{$parent.$index}}child{{$index}}' ng-click='highlight($parent.$index, $index, word)'>{{word.word}}</span> " +
-                "</span>" +
-                "</p>" +
-                "<p>TIME REMAINING: {{minutes}}:{{seconds}}</p>" +
-                "<p>WORDS HIGHLIGHTED: {{wordsHighlighted}}</p>" +
-                "<button ng-show='!timerStarted' onclick='loadInstructions(\"one\")' ng-click='saveSurveyData()'>continue</button>" +
-                "</div>" +
-                "</div>"
+        if(checkForValidID()){
+            $scope.movingOnwards = true;
+            $scope.wordsHighlighted = 0;
+            $("#instructions").html(
+                $compile(
+                    "<div> " +
+                    "<h2 >{{activeSurvey.instructionHeader}}</h2>" +
+                    "<p>{{activeSurvey.instructions}}</p>" +
+                    "<button ng-hide='startSurvey' ng-click='loadSurvey()'>start</button>" +
+                    "<div ng-show='startSurvey'>" +
+                    "<h2 >{{activeSurvey.title}}</h2>" +
+                    "<p style='cursor:default;'>" +
+                    "<span ng-repeat='key in activeSurvey.wordArray track by $index' >" +
+                        "<span ng-repeat='word in key track by $index' ng-style='myStyle{{$parent.$index}}child{{$index}}' ng-click='highlight($parent.$index, $index, word)'>{{word.word}}</span> " +
+                    "</span>" +
+                    "</p>" +
+                    "<p>TIME REMAINING: {{minutes}}:{{seconds}}</p>" +
+                    "<p>WORDS HIGHLIGHTED: {{wordsHighlighted}}</p>" +
+                    "<button ng-show='!timerStarted' onclick='loadInstructions(\"one\")' ng-click='saveSurveyData()'>continue</button>" +
+                    "</div>" +
+                    "</div>"
 
-            )($scope)
-        );
+                )($scope)
+            );
+        }
     }
 
     $scope.loadSurvey = function () {

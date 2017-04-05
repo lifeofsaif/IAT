@@ -12,14 +12,13 @@ function randomString(length) {
 function initialize()
 {	
 	// get active template & load data into global variable
-	$.getJSON("templates/active.txt", function(input) {
+	$.getJSON("templates/active.txt?", function(input) {
 		document.title = input.active + " IAT";
 		$.getJSON("templates/"+input.active+"/input.txt", function(data) { 
 			template = data;
-
 			$.get("core/instruct0.html", function(data) {
-				//$("#instructions").html(data);
-				$("#subID").val(randomString(10));
+				// $("#instructions").html(data);
+				// $("#subID").val(randomString(10));
 			});
 		});
 	});
@@ -32,7 +31,8 @@ function loadInstructions(stage)
 	{
 		case 'one':
 			sub = $("#subID").val();
-			if(sub.search('/[^a-zA-Z0-9]/g')==-1)
+			// if(sub.search('/[^a-zA-Z0-9]/g')==-1)
+                        if(sub !== "")
 			{
 				$.get("core/instruct1.html", function(data) {
 					$("#instructions").html(data);
@@ -567,12 +567,11 @@ function WriteFile()
 			
 		}
 	}
-	str = str + surveyData;
 	
-    $.post("core/fileManager.php", { 'op':'writeoutput', 'template':template.name,
- 			'subject': subject, 'data': str });
-
-
+	
+    $.post("core/fileManager.php", { 'op':'writeoutput', 'template':template.name, 
+ 			'subject': subject, 'data': str });	
+ 	
 	// notify user of success?
 }
 function WriteDatabase()

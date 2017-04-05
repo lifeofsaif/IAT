@@ -185,26 +185,10 @@ function initExperimenter()
 	{
 		$("input[type=button]").button();
 		$("#set-active").click(setActive);
-        $("#set-active-survey").click(setActiveSurvey);
-
 	});
 	
 	
 }
-
-/* SURVEY FUNCTIONALITY BEGIN */
-
-function setActiveSurvey(){
-	console.log("setting active survey");
-}
-
-function loadCreateFormSurvey(){
-	console.log("loading create form for survey")
-}
-
-/* SURVEY FUNCTIONALITY END */
-
-
 
 function initTemplates(input)
 {
@@ -1037,5 +1021,3 @@ function buildStatsPage(input)
 	
 	// Change active IAT
 }
-
-

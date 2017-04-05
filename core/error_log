@@ -1,0 +1,27 @@
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 344
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 345
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 346
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:43:56 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:44:02 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:44:02 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:44:02 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 344
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 345
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  mkdir(): No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 346
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:44:34 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:46:04 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:46:04 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:46:04 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:46:25 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:46:25 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:46:25 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:50:23 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:50:23 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:50:23 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365
+[17-Sep-2014 23:50:44 America/New_York] PHP Warning:  fopen(../templates/BB-Self/Other/input.txt): failed to open stream: No such file or directory in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 363
+[17-Sep-2014 23:50:44 America/New_York] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 364
+[17-Sep-2014 23:50:44 America/New_York] PHP Warning:  fclose() expects parameter 1 to be resource, boolean given in /home/metabias/public_html/test/IAT-master/core/fileManager.php on line 365

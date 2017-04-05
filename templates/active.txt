@@ -1,1 +1,1 @@
-{"active":"Science","available":["Empty","Race","Science"]}
+{"active":"BB 4","available":{"8":"BB-IAT1","2":"BB 4","5":"BB 5","4":"BBIAT-2","6":"BBIAT-3","1":"Empty","0":"ISE","7":"Race","3":"Science"}}

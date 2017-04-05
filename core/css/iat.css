@@ -1,6 +1,7 @@
 body {
     background:none repeat scroll 0 0 #FFFFFF;
     border:0 none;
+	font-family: Arial;
 }
 
 #instructions
@@ -24,6 +25,7 @@ body {
 
 #left_cat
 {
+	font-family: Arial;
 	font-size: 1.5em;
 	margin: 15px;
 	float: left;
@@ -31,6 +33,7 @@ body {
 
 #right_cat
 {
+	font-family: Arial;
 	font-size: 1.5em;
 	margin: 15px;
 	float: right;
@@ -57,6 +60,7 @@ body {
 
 .IATitem
 {
+	font-family: Arial;
 	font-size: 1.5em;
 	margin-left: auto;
 	margin-right: auto;
