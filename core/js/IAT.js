@@ -568,6 +568,10 @@ function WriteFile()
 		}
 	}
 	
+    if(surveyData){
+		str = str + surveyData;
+        console.log('hello')
+    }
 	
     $.post("core/fileManager.php", { 'op':'writeoutput', 'template':template.name, 
  			'subject': subject, 'data': str });	
